@@ -26,7 +26,7 @@ public class Consola implements Alquilable{
 		return cantidad;
 	}
 	
-	public Boolean alquilar() {
+	public Boolean esAlquilable() {
 		Boolean esAlquilable = true;
 		return esAlquilable;
 	}

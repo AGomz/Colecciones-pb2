@@ -1,17 +1,16 @@
 package ar.edu.unlam.biblioteca;
 
-public class SecHistoria extends LibrosSecundaria implements Fotocopiable{
+public class SecHistoria extends Libro implements Fotocopiable{
 
 	public SecHistoria(String codigoLibro, String nombreLibro, String autor, String editorial, Integer cantidadDeCopias,
-			TipoNivel nivel) {
-		super(codigoLibro, nombreLibro, autor, editorial, cantidadDeCopias, nivel);
+			TipoNivel nivel, TipoMateria materia) {
+		super(codigoLibro, nombreLibro, autor, editorial, cantidadDeCopias, nivel, materia);
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public Boolean fotocopiar(Libro libro) {
-		// TODO Auto-generated method stub
-		return null;
+	public Boolean sePuedeFotocopiar() {
+		Boolean esFotocopiable = true;
+		System.out.println("El libro de" + this.getNombreLibro() + "se fotocopió");
+		return esFotocopiable;
 	}
-
 }

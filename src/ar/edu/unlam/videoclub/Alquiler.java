@@ -1,60 +1,39 @@
 package ar.edu.unlam.videoclub;
 
 public class Alquiler {
-
-	private Pelicula pelicula;
-	private Consola consola;
-	private Cliente cliente;
 	
-	private String titulo;
-	private String anio;
-	private TipoPelicula tipoPelicula;
-	private TipoConsola tipo;
-	private String nombreYapellido;
-	private Integer edad;
-	
-	/*private String idPelicula;
+	private String idPelicula;
 	private String idConsola;
-	private String nroSocio;*/
+	private String nroSocio;
 	
 	public Alquiler(String idPelicula, String idConsola, String nroSocio) {
-		this.pelicula = new Pelicula(idPelicula, titulo, anio, tipoPelicula);
-		this.consola = new Consola(idConsola, tipo);
-		this.cliente = new Cliente(nroSocio, nombreYapellido, edad);
-	
+		this.idPelicula = idPelicula;
+		this.idConsola = idConsola;
+		this.nroSocio = nroSocio;
 	}
 
-	//Debe ir aca o en blockbuster
-	public Boolean alquilarCondicionada() {
-		Boolean seAlquilo = false;
-		if(this.pelicula.getTipo().equals(TipoPelicula.CONDICIONADAS) && this.cliente.esMayorDeEdad()) {
-			seAlquilo = true;
-		}
-		return seAlquilo;
-	}
-	
-	public Pelicula getPelicula() {
-		return pelicula;
+	public String getIdPelicula() {
+		return idPelicula;
 	}
 
-	public void setPelicula(Pelicula pelicula) {
-		this.pelicula = pelicula;
+	public void setIdPelicula(String idPelicula) {
+		this.idPelicula = idPelicula;
 	}
 
-	public Consola getConsola() {
-		return consola;
+	public String getIdConsola() {
+		return idConsola;
 	}
 
-	public void setConsola(Consola consola) {
-		this.consola = consola;
+	public void setIdConsola(String idConsola) {
+		this.idConsola = idConsola;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
+	public String getNroSocio() {
+		return nroSocio;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setNroSocio(String nroSocio) {
+		this.nroSocio = nroSocio;
 	}
 	
 }

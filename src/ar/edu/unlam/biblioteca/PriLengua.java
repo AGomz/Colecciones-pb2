@@ -1,11 +1,12 @@
 package ar.edu.unlam.biblioteca;
 
-public class PriLengua extends LibrosPrimaria{
+public class PriLengua extends Libro{
 
 	public PriLengua(String codigoLibro, String nombreLibro, String autor, String editorial, Integer cantidadDeCopias,
-			TipoNivel nivel) {
-		super(codigoLibro, nombreLibro, autor, editorial, cantidadDeCopias, nivel);
+			TipoNivel nivel, TipoMateria materia) {
+		super(codigoLibro, nombreLibro, autor, editorial, cantidadDeCopias, nivel, materia);
 		// TODO Auto-generated constructor stub
 	}
+
 
 }

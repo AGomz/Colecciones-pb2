@@ -8,17 +8,28 @@ public class Libro {
 	private String editorial;
 	private Integer cantidadDeCopias;
 	private TipoNivel nivel;
-	private String asignatura; //Para poder compararlo en el metodo fotocopiable
 	
-	public Libro(String codigoLibro, String nombreLibro, String autor, String editorial, Integer cantidadDeCopias, TipoNivel nivel) {
+	private TipoMateria materia;
+	
+	public Libro(String codigoLibro, String nombreLibro, String autor, String editorial, Integer cantidadDeCopias, TipoNivel nivel, TipoMateria materia) {
 		this.codigoLibro = codigoLibro;
 		this.nombreLibro = nombreLibro;
 		this.autor = autor;
 		this.editorial = editorial;
-		this.cantidadDeCopias = cantidadDeCopias; //O debería ir fuera del constructor
+		this.cantidadDeCopias = cantidadDeCopias; /*Para pasarle cuantas hay de ese ejemplar*/
 		this.nivel = nivel;
+		
+		this.materia = materia;
 	}
 	
+	//public abstract TipoMateria getMateria();
+
+	public void setMateria(TipoMateria materia) {
+		this.materia = materia;
+	}
+	
+	
+
 	public String getCodigoLibro() {
 		return codigoLibro;
 	}

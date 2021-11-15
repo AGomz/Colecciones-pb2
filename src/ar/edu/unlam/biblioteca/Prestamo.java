@@ -2,28 +2,46 @@ package ar.edu.unlam.biblioteca;
 
 public class Prestamo {
 
-	private String dniEstudiante;
-	private String codigoLibro;
+	private Estudiante dniEstudiante;
+	private Libro codigoLibro;
 	
+	//Un prestamo tiene un dni y un codgo
 	public Prestamo(String dniEstudiante, String codigoLibro) {
-		this.dniEstudiante = dniEstudiante;
-		this.codigoLibro = codigoLibro; //O debería pasarle el constructor
+		this.dniEstudiante = new Estudiante(dniEstudiante);
+		this.codigoLibro = new Libro(codigoLibro); 
 	}
 
-	public String getDniEstudiante() {
-		return dniEstudiante;
+	private Estudiante estudiante;
+	private Libro libro;
+	
+	//Un prestamo usa un dni y un cdigo
+	/*public Prestamo(Estudiante estudiante, Libro libro) {
+		this.estudiante = estudiante;
+		this.libro = libro;
+	}*/
+	
+	public Boolean esValido() {
+		Boolean resultado = false;
+		if(this.getEstudiante().getTipo().equals(this.getLibro().getNivel())) {
+			resultado = true;
+		}
+		return resultado;
 	}
 
-	public void setDniEstudiante(String dniEstudiante) {
-		this.dniEstudiante = dniEstudiante;
+	public Estudiante getEstudiante() {
+		return estudiante;
 	}
 
-	public String getCodigoLibro() {
-		return codigoLibro;
+	public void setEstudiante(Estudiante estudiante) {
+		this.estudiante = estudiante;
 	}
 
-	public void setCodigoLibro(String codigoLibro) {
-		this.codigoLibro = codigoLibro;
+	public Libro getLibro() {
+		return libro;
+	}
+
+	public void setLibro(Libro libro) {
+		this.libro = libro;
 	}
 	
 }
