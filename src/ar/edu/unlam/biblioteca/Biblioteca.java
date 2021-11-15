@@ -8,51 +8,95 @@ public class Biblioteca {
 
 	private List<Libro> libros; 
 	private List<Prestamo> prestamos;
+	/*Los que tiene para prestar la biblioteca*/
 	private final Integer CANT_COPIAS_PRESTAR=3;
 	private Integer COPIA_LECTURA=1;
+	
+	/*Los que puede realizar el estudiante*/
 	private final Integer CANT_MAX_PRESTAMOS=2;
 	
-	//private Integer cantidadDePrestamos;
+	private Integer cantidadLibrosPrestados;
+	private Integer cantidadDeCopias;
 	
 	public Biblioteca() {
 		libros = new ArrayList<Libro>();
 		prestamos = new ArrayList<Prestamo>();
 		
-		//this.cantidadDePrestamos = 0;
+		this.cantidadLibrosPrestados = 0;
+		this.cantidadDeCopias = 0;
 	}
 
-	public void agregarLibro(Libro nuevoLibro) {
-		this.libros.add(nuevoLibro);
+	public Boolean agregarLibro(Libro nuevoLibro) {
+		Boolean seAgrego = false;
+		seAgrego = this.libros.add(nuevoLibro);
+		return seAgrego;
 	}
 	
-	public Boolean prestarLibro(Libro libroPedido, TipoNivel tipo, Prestamo libroPrestado) {
-		Boolean sePudoPrestar = false;
-		if(libroPedido.getNivel().equals(tipo)) {
-			//REVISAR
-			if(libroPedido.getCantidadDeCopias()>this.COPIA_LECTURA && libroPedido.getCantidadDeCopias()<=this.CANT_COPIAS_PRESTAR) {
-				libroPedido.setCantidadDeCopias(libroPedido.getCantidadDeCopias()-1); 
-				prestamos.add(libroPrestado);
-				sePudoPrestar=true;
-			}
-		}
-		return sePudoPrestar;
-	}
-	
-	public Boolean pedirLibro(Estudiante alumno) {
-		Boolean sePudoPedir=false;
-		Integer cantidadPrestamos=0;
+		public Boolean alquilarLibro(Prestamo prestamo) {
+		Boolean resultado = false;
 		
-		for(Prestamo prestamo: this.prestamos) {
-			if(prestamo.getDniEstudiante().equals(alumno.getDocumento()) && cantidadPrestamos<this.CANT_MAX_PRESTAMOS) {
-				cantidadPrestamos++;
-				sePudoPedir=true;
-			}
-		}
-		return sePudoPedir;
+		//Si ambos tienen mismo nivel de educación
+		if(prestamo.esValido() && this.cantidadLibrosPrestados<this.CANT_MAX_PRESTAMOS) {
+			if(this.cantidadDeCopias<this.CANT_COPIAS_PRESTAR) {
+				prestamos.add(prestamo);
+				this.cantidadLibrosPrestados++;
+				this.cantidadDeCopias--;
+				resultado=true;
+			 }
+		 }
+		return resultado;
 	}
 	
-	//puede ser Boolean
-	public void devolverLibro(Prestamo libro) {
-		prestamos.remove(libro);
+	//Devuelve true siempre que pueda imprimirse
+	public Boolean fotocopiarLibro(String idLibro, String idCliente) throws LibroNoFotocopiableException, LibroNoEncontradoException{
+			Boolean resultado=true;
+			Prestamo prestamo;
+			Libro libroEncontrado = buscarLibro(idLibro);
+			/*Casteo + instanceof:
+			 * libroEncontrado es de Libro por eso lo casteo para poder acceder a los metodos de esa clase, por ejemplo fotocopiar()
+			 * Me permite conocer/llamar a los metodos de las clases 
+			 * Si una de las clases no tiene ese metodo, da error*/
+			if(libroEncontrado instanceof PriSociales) {
+				
+				((PriSociales)libroEncontrado).sePuedeFotocopiar();
+				prestamo = new Prestamo(idLibro, idCliente);
+				
+			}else {
+				throw new LibroNoFotocopiableException();
+			}
+			return resultado;	
 	}
+	
+	private Libro buscarLibro(String idLibro) throws LibroNoEncontradoException {
+		for(Libro libroBuscado : this.libros) {
+			if(libroBuscado.getCodigoLibro().equals(idLibro)) {
+				return libroBuscado;
+			}
+		}
+		throw new LibroNoEncontradoException();
+	}
+
+	//puede ser Boolean
+	public Integer devolverLibro(Prestamo prestamo) {
+		prestamos.remove(prestamo);
+		this.cantidadDeCopias++;
+		return this.cantidadLibrosPrestados--;
+	}
+
+	public Integer getCantidadDeCopias() {
+		return cantidadDeCopias;
+	}
+
+	public void setCantidadDeCopias(Integer cantidadDeCopias) {
+		this.cantidadDeCopias = cantidadDeCopias;
+	}
+
+	public Integer getCantidadLibrosPrestados() {
+		return cantidadLibrosPrestados;
+	}
+
+	public void setCantidadLibrosPrestados(Integer cantidadLibrosPrestados) {
+		this.cantidadLibrosPrestados = cantidadLibrosPrestados;
+	}
+
 }

@@ -1,0 +1,17 @@
+package ar.edu.unlam.biblioteca;
+
+public enum TipoMateria {
+	ANALISISMAT,
+	ALGEBRA,
+	QUIMICA,
+	FISICA,
+	FILOSOFIA,
+	LEYES,
+	EDCIVICA,
+	HISTORIA,
+	GEOGRAFIA,
+	MATEMATICA,
+	CSNATURALES,
+	CSSOCIALES,
+	LENGUA
+}

@@ -6,6 +6,10 @@ public class Estudiante {
 	private String documento;
 	private TipoNivel tipo;
 	
+	public Estudiante(String documento) {
+		this.documento = documento;
+	}
+			
 	public Estudiante(String nombreYapellido, String documento, TipoNivel tipo) {
 		this.nombreYapellido = nombreYapellido;
 		this.documento = documento;

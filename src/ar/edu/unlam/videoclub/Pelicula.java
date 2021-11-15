@@ -1,6 +1,6 @@
 package ar.edu.unlam.videoclub;
 
-public class Pelicula {
+public abstract class Pelicula implements Alquilable{
 	
 	private String id;
 	private String titulo;
@@ -14,6 +14,8 @@ public class Pelicula {
 		this.tipo = tipo;
 	}
 
+	public abstract TipoPelicula getTipo();
+	
 	public String getId() {
 		return id;
 	}
@@ -38,12 +40,5 @@ public class Pelicula {
 		this.anio = anio;
 	}
 
-	public TipoPelicula getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(TipoPelicula tipo) {
-		this.tipo = tipo;
-	}
 
 }

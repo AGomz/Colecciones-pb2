@@ -46,34 +46,41 @@ Entidad Cliente
 		TipoPelicula tipo = TipoPelicula.SUSPENSO;
 		Integer valorEsperado=2;
 		Blockbuster videoclub = new Blockbuster();
-		Pelicula pelicula = new Pelicula(id, titulo, anio, tipo);
+		Pelicula pelicula = new TipoAccion(id, titulo, anio, tipo);
 		
 		videoclub.agregarPelicula(pelicula);
 		videoclub.agregarPelicula(pelicula);
 		Integer valorObtenido = videoclub.obtenerCantidadDePeliculas();
 		assertEquals(valorEsperado, valorObtenido);
 	}
+	
 	@Test
-	public void queSePuedaAgregarConsolasAlBlockbuster() {
-		String id="2";
-		TipoConsola tipo= TipoConsola.PLAY3;
+	public void queSePuedaAlquilarUnaPelicula() throws PeliculaNoEncontradaException, PeliculaNoAlquilableException {
+		String id="1";
+		String titulo="Parasite";
+		String anio="2020";
+		TipoPelicula tipo = TipoPelicula.SUSPENSO;
 		Blockbuster videoclub = new Blockbuster();
-		Consola consola = new Consola(id, tipo);
+		Pelicula pelicula = new TipoAccion(id, titulo, anio, tipo);
+		Cliente cliente = new Cliente("a22", "carolina gomez", 20);
 		
-		Boolean valorObtenido = videoclub.agregarConsola(consola);
-		assertTrue(valorObtenido);
+		videoclub.agregarPelicula(pelicula);
+		
+		videoclub.alquilarPelicula(cliente, pelicula);	
 	}
-	@Test
-	public void queSePuedaAgregarUnAlquilerCorrectamente() {
-		String idConsola = "23";
-		String idPelicula = "10";
-		String nroSocio = "444";
+	@Test(expected=PeliculaNoAlquilableException.class)
+	public void  queNoSePuedaAlquilarUnaPeliculaQueNoExista() throws PeliculaNoEncontradaException, PeliculaNoAlquilableException {
+		String id="1";
+		String titulo="Parasite";
+		String anio="2020";
+		TipoPelicula tipo = TipoPelicula.ROMANCE;
 		Blockbuster videoclub = new Blockbuster();
-		Alquiler alquiler = new Alquiler(idPelicula, idConsola, nroSocio);
+		Pelicula pelicula = new TipoRomance(id, titulo, anio, tipo);
+		Cliente cliente = new Cliente("a22", "carolina gomez", 20);
 		
-		Boolean valorEsperado = true;
-		Boolean valorObtenido = videoclub.agregarAlquiler(alquiler);
-		assertEquals(valorEsperado, valorObtenido);
+		videoclub.agregarPelicula(pelicula);
+		
+		videoclub.alquilarPelicula(cliente, pelicula);	
 	}
 
 }

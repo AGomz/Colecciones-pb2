@@ -2,18 +2,23 @@ package ar.edu.unlam.videoclub;
 
 public class TipoCondicionadas extends Pelicula implements Alquilable{
 
-	public TipoCondicionadas(String id, String titulo, String anio, TipoPelicula tipo) {
+	Cliente cliente; 
+	
+	public TipoCondicionadas(String id, String titulo, String anio, TipoPelicula tipo, Cliente cliente) {
 		super(id, titulo, anio, tipo);
-		// TODO Auto-generated constructor stub
+		this.cliente = cliente;
 	}
 
 	@Override
-	public Boolean alquilar() {
-		Boolean sePuedeAlquilar = false;
-		//if() {
-			
-		//}
+	public Boolean esAlquilable() {
+		Boolean sePuedeAlquilar = true;
+		System.out.println("La pelicula" + this.getTitulo() + "se pudo alquilar");
 		return sePuedeAlquilar;
+	}
+
+	@Override
+	public TipoPelicula getTipo() {
+		return TipoPelicula.CONDICIONADAS;
 	}
 
 }
